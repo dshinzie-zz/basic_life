@@ -1,1 +1,11 @@
-<h1>sup again</h1>
+<h1>Chat Room</h1>
+
+{% for chat in chats %}
+<ul>
+  <li>{{chat.name}} - {{chat.message}} - {{chat.published_date}}</li>
+</ul>
+{% endfor %}
+<form class="" method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" name="button">Send Chat</button>
+</form>

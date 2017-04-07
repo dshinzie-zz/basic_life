@@ -1,12 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import JsonResponse
-from .forms import UserForm
-from .models import User
+from .forms import UserForm, ChatForm
+from .models import User, Chat
 
 def home(request):
     users = User.objects.all()
-    return render(request, 'home.html', {'users': users })
+    chats = Chat.objects.all()
+    if request.method == "POST":
+        form = ChatForm(request.POST)
+        if form.is_valid():
+            chat = form.save(commit=False)
+            chat.published_date = timezone.now()
+            chat.save()
+    else:
+        form = ChatForm()
+    return render(request, 'home.html', {'users': users, 'form': form, 'chats': chats })
 
 def users_new(request):
     if request.method == "POST":
