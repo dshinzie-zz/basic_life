@@ -7,5 +7,5 @@
 {% endfor %}
 <form class="" method="post">{% csrf_token %}
   {{ form.as_p }}
-  <button type="submit" name="button">Send Chat</button>
+  <button type="submit" name="button" id="send-chat">Send Chat</button>
 </form>

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from .forms import UserForm, ChatForm
 from .models import User, Chat
+from django.core import serializers
 
 def home(request):
     users = User.objects.all()
@@ -28,3 +29,13 @@ def users_new(request):
     else:
         form = UserForm()
     return render(request, 'users/new.html', {'form': form})
+
+def chats(request):
+    def _get_chats():
+        return [{
+            'name': chat.name,
+            'message': chat.message,
+            'published_date': chat.published_date
+        } for chat in Chat.objects.order_by("-published_date")]
+    chats = _get_chats()
+    return JsonResponse(chats, safe=False)
