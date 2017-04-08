@@ -9,6 +9,9 @@ class Room(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.name
+
 class Message(models.Model):
     room = models.ForeignKey(Room, related_name="messages")
     handle = models.CharField(max_length=200)
