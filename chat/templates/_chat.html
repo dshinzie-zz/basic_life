@@ -1,10 +1,8 @@
 <h1>Chat Room</h1>
 
-{% for chat in chats %}
-<ul>
-  <li>{{chat.name}} - {{chat.message}} - {{chat.published_date}}</li>
-</ul>
-{% endfor %}
+
+<ul id="chat-list"></ul>
+
 <form class="" method="post">{% csrf_token %}
   {{ form.as_p }}
   <button type="submit" name="button" id="send-chat">Send Chat</button>

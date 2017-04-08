@@ -36,6 +36,16 @@ def chats(request):
             'name': chat.name,
             'message': chat.message,
             'published_date': chat.published_date
-        } for chat in Chat.objects.order_by("-published_date")]
+        } for chat in Chat.objects.order_by("published_date")]
     chats = _get_chats()
     return JsonResponse(chats, safe=False)
+
+def chats_new(request):
+
+    form = ChatForm(request.POST)
+    if form.is_valid():
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.published_date = timezone.now()
+            user.save()
+    return render(request, 'users/new.html', {'form': form})
