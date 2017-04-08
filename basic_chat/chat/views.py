@@ -41,7 +41,6 @@ def chats(request):
     return JsonResponse(chats, safe=False)
 
 def chats_new(request):
-
     form = ChatForm(request.POST)
     if form.is_valid():
         if form.is_valid():
