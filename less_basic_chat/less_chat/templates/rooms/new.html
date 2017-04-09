@@ -1,0 +1,9 @@
+{% extends '../base.html' %}
+
+{% block content %}
+  <h1>New Room</h1>
+  <form class="new-room" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button id="submit-room" type="submit" name="submit">Create Room</button>
+  </form>
+{% endblock %}
