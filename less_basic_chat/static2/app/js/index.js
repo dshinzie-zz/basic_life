@@ -36,7 +36,7 @@ function postChat(newUser, newMessage){
   ajaxSetup();
 
   $.ajax({
-    url: "/api/v1/messages",
+    url: "/api/v1/messages/",
     type: "POST",
     data: {
       room: roomId,

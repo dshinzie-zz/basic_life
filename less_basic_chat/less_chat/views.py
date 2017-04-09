@@ -28,6 +28,7 @@ def room_detail(request, pk):
 def message_list(request):
     if request.method == "POST":
         form = MessageForm(request.POST)
+        room = get_object_or_404(Room, pk=request.POST['room'])
         if form.is_valid():
             message = form.save(commit=False)
             message.room = room
