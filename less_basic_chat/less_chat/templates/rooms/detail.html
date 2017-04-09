@@ -3,6 +3,9 @@
 {% block content %}
   <h1>Room {{room.name}}</h1>
   <ul id="messages">
-
   </ul>
+  <form class="new-message" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button id="submit-message" type="submit" name="button">Submit</button>
+  </form>
 {% endblock %}

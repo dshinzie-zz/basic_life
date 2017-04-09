@@ -22,8 +22,15 @@ def room_new(request):
 
 def room_detail(request, pk):
     room = get_object_or_404(Room, pk=pk)
-
-    return render(request, 'rooms/detail.html', {'room': room })
+    form = MessageForm()
+    return render(request, 'rooms/detail.html', {'room': room, 'form': form })
 
 def message_list(request):
-    return Message.get_chats()
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.room = room
+            message.updated_at = timezone.now()
+            message.save()
+    return JsonResponse(Message.get_chats(), safe=False)
