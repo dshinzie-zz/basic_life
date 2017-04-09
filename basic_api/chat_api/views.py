@@ -5,10 +5,10 @@ from .models import Room, Message
 def chats(request):
     def _get_chats():
         return [{
-            'room': message.room,
+            'room': message.room.name,
             'handle': message.handle,
             'message': message.message
         } for message in Message.objects.all()]
-    
+
     chats = _get_chats()
     return JsonResponse(chats, safe=False)
