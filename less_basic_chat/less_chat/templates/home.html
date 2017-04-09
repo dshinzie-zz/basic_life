@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Welcome to Less Chat</h1>
-<a href="{% url 'room_new' %}">New Room</a>
+<a href="{% url 'room_new' %}">New Room</a></br>
+
+<h3>Rooms</h3>
+{% for room in rooms %}
+  <a href="{% url 'room_detail' pk=room.pk %}">{{ room.name }}</a>
+{% endfor %}
 {% endblock%}
