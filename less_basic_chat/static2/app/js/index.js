@@ -14,10 +14,12 @@ function getChats(){
     complete: function(data){
       console.log("Messages received");
     }
-  });
+  }, setTimeout(getChats, 1000));
+  appendChats();
 }
 
 function appendChats(){
+  $('#messages li').remove();
   for (var i = 0; i < messages.length; i++) {
     $('#messages').append(`<li>${messages[i].username} - ${messages[i].message}</li>`)
   }
@@ -72,9 +74,15 @@ function ajaxSetup(){
   });
 }
 
+function doPoll(){
+    $.post('ajax/test.html', function(data) {
+        alert(data);  // process results here
+        setTimeout(doPoll,5000);
+    });
+}
+
 $(document).ready(() => {
   getChats();
-  appendChats();
 
   $("#submit-message").on("click", (e) => {
     e.preventDefault();
