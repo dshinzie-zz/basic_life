@@ -15,3 +15,11 @@ class Message(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(blank=True, null=True)
+
+    @classmethod
+    def get_chats(cls):
+        return [{
+            'username': message.username,
+            'message': message.message,
+            'updated_at': message.updated_at
+        } for message in Message.objects.order_by("created_at")]

@@ -22,4 +22,8 @@ def room_new(request):
 
 def room_detail(request, pk):
     room = get_object_or_404(Room, pk=pk)
+
     return render(request, 'rooms/detail.html', {'room': room })
+
+def message_list(request):
+    return Message.get_chats()
